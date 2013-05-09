@@ -1,0 +1,6 @@
+eclipse.preferences.version=1
+include_path=5;org.zend.php.framework.CONTAINER\u00050;/zendcms
+org.eclipse.php.core.phpForamtterIndentationSize=4
+org.eclipse.php.core.phpForamtterTabSize=4
+org.eclipse.php.core.phpForamtterUseTabs=false
+use_asp_tags_as_php=false
