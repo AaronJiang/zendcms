@@ -74,4 +74,23 @@ class Model_Page extends Zend_Db_Table_Abstract
                     'Delete function failed; could not find page!');
         }
     }
+
+    public function getRecentPages ($count = 10, $namespace = 'page')
+    {
+        $select = $this->select();
+        $select->order('date_created ASC');
+        $select->where('namespace = ?', $namespace);
+        $select->limit($count);
+        $results = $this->fetchAll($select);
+        if ($results->count() > 0) {
+            $pages = array();
+            foreach ($results as $result) {
+                $pages[$result->id] = new CMS_Content_Item_Page($result->id);
+            }
+            return $pages;
+        } else {
+            return null;
+        }
+
+    }
 }

@@ -23,6 +23,8 @@
         <controllerFile controllerName="Page">
           <actionMethod actionName="index"/>
           <actionMethod actionName="create"/>
+          <actionMethod actionName="list"/>
+          <actionMethod actionName="edit"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
@@ -60,6 +62,12 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Page">
             <viewScriptFile forActionName="create"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Page">
+            <viewScriptFile forActionName="list"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Page">
+            <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

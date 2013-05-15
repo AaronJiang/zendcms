@@ -3,7 +3,7 @@
 abstract class CMS_Content_Item_Abstract
 {
 
-    const NO_SETTER = 'setter method does not exist';
+    const NO_SETTER = 'Setter methode bestaat niet';
 
     public $id;
 
@@ -17,7 +17,7 @@ abstract class CMS_Content_Item_Abstract
 
     public function __construct ($pageId = null)
     {
-        $this->_pageModel = new Page();
+        $this->_pageModel = new Model_Page();
         if (null != $pageId) {
             $this->loadPageObject(intval($pageId));
         }
@@ -46,7 +46,6 @@ abstract class CMS_Content_Item_Abstract
 
     protected function _callSetterMethod ($property, $data)
     {
-        // create the method name
         $method = Zend_Filter::filterStatic($property, 
                 'Word_UnderscoreToCamelCase');
         $methodName = '_set' . $method;
@@ -60,12 +59,13 @@ abstract class CMS_Content_Item_Abstract
     public function loadPageObject ($id)
     {
         $this->id = $id;
-        $row = $this->getInnerRow();
+        $row = $this->_getInnerRow();
         if ($row) {
             if ($row->namespace != $this->_namespace) {
                 throw new Zend_Exception(
-                        'Unable to cast page type:' . $row->namespace .
-                                 ' to type:' . $this->_namespace);
+                        'Niet in staat om pagina type te weergeven:' .
+                                 $row->namespace . ' naar type:' .
+                                 $this->_namespace);
             }
             $this->name = $row->name;
             $this->parent_id = $row->parent_id;
@@ -76,7 +76,6 @@ abstract class CMS_Content_Item_Abstract
                 foreach ($nodes as $node) {
                     $key = $node['node'];
                     if (in_array($key, $properties)) {
-                        // try to call the setter method
                         $value = $this->_callSetterMethod($key, $nodes);
                         if ($value === self::NO_SETTER) {
                             $value = $node['content'];
@@ -86,7 +85,7 @@ abstract class CMS_Content_Item_Abstract
                 }
             }
         } else {
-            throw new Zend_Exception("Unable to load content item");
+            throw new Zend_Exception("Niet in staat om content item te laden");
         }
     }
 
@@ -127,7 +126,8 @@ abstract class CMS_Content_Item_Abstract
         if (isset($this->id)) {
             $this->_pageModel->deletePage($this->id);
         } else {
-            throw new Zend_Exception('Unable to delete item; the item is empty!');
+            throw new Zend_Exception(
+                    'Niet in staat om item te verwijderen; het item is leeg!');
         }
     }
 }

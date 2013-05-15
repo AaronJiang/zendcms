@@ -1,1 +1,1 @@
-A simple CMS system built on Zend Framework 1.10
+A simple CMS system built on Zend Framework 1.10. Please configure and deploy as Zend Framework 1 official tutorial http://framework.zend.com/manual/1.12/en/manual.html. And make sure you've created a mysql database named 'zf_cms' and imported the zf_cms.sql into it.
