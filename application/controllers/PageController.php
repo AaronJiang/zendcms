@@ -12,7 +12,6 @@ class PageController extends Zend_Controller_Action
     {
         $pageModel = new Model_Page();
         $recentPages = $pageModel->getRecentPages();
-        
         if (is_array($recentPages)) {
             // the 3 most recent items are the featured items
             for ($i = 1; $i <= 3; $i ++) {
@@ -114,7 +113,22 @@ class PageController extends Zend_Controller_Action
         $itemPage->delete();
         return $this->_forward('list');
     }
+
+    public function openAction ()
+    {
+        $id = $this->_request->getParam('id');
+        // first confirm the page exists
+        $pageModel = new Model_Page();
+        if (! $pageModel->find($id)->current()) {
+            throw new Zend_Controller_Action_Exception(
+                    'The page you requested was not found', 404);
+        } else {
+            $this->view->page = new CMS_Content_Item_Page($id);
+        }
+    }
 }
+
+
 
 
 
