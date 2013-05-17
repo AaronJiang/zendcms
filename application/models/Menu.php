@@ -42,4 +42,25 @@ class Model_Menu extends Zend_Db_Table_Abstract
             return null;
         }
     }
+
+    public function updateMenu ($id, $name)
+    {
+        $currentMenu = $this->find($id)->current();
+        if ($currentMenu) {
+            $currentMenu->name = $name;
+            return $currentMenu->save();
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteMenu ($menuId)
+    {
+        $row = $this->find($menuId)->current();
+        if ($row) {
+            return $row->delete();
+        } else {
+            throw new Zend_Exception('Error loading menu');
+        }
+    }
 }

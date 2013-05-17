@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 15, 2013 at 03:05 PM
+-- Generation Time: May 17, 2013 at 04:46 PM
 -- Server version: 5.1.62
 -- PHP Version: 5.3.10-1ubuntu2ppa6~lucid
 
@@ -80,6 +80,48 @@ INSERT INTO `content_nodes` (`id`, `page_id`, `node`, `content`) VALUES
 (30, 8, 'image', '/images/upload/be-social-d28435fe03535dfa84b8b83894a4f468.gif'),
 (31, 8, 'description', 'One of the great features on GitHub is the ability to see what other people are working on and who they are connecting with. When you follow someone, you will get notifications on your dashboard about their GitHub activity.'),
 (32, 8, 'content', 'At some point you may want to stay up-to-date with a specific project. We\\''ve made this easy to do.\r\nWatch a project\r\n\r\nOur friend the Octocat has a project called Hello World that we\\''d like to watch.\r\n\r\nOnce you are on the project page, you will notice there is a \\"watch\\" button at the top of the page. Click on it.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menus`
+--
+
+CREATE TABLE IF NOT EXISTS `menus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `access_level` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `menus`
+--
+
+INSERT INTO `menus` (`id`, `name`, `access_level`) VALUES
+(3, 'admin_menu', NULL),
+(4, 'main_menu', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu_items`
+--
+
+CREATE TABLE IF NOT EXISTS `menu_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_id` int(11) DEFAULT NULL,
+  `label` varchar(250) DEFAULT NULL,
+  `page_id` int(11) DEFAULT NULL,
+  `link` varchar(250) DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `menu_items`
+--
+
 
 -- --------------------------------------------------------
 

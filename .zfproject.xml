@@ -31,9 +31,11 @@
           <actionMethod actionName="index"/>
           <actionMethod actionName="create"/>
           <actionMethod actionName="edit"/>
+          <actionMethod actionName="delete"/>
         </controllerFile>
         <controllerFile controllerName="Menuitem">
           <actionMethod actionName="index"/>
+          <actionMethod actionName="add"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
@@ -92,6 +94,12 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Menu">
             <viewScriptFile forActionName="edit"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Menu">
+            <viewScriptFile forActionName="delete"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Menuitem">
+            <viewScriptFile forActionName="add"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
