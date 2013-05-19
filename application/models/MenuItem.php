@@ -43,4 +43,17 @@ class Model_MenuItem extends Zend_Db_Table_Abstract
         $row->position = $this->_getLastPosition($menuId) + 1;
         return $row->save();
     }
+
+    private function _getLastPosition ($menuId)
+    {
+        $select = $this->select();
+        $select->where('menu_id = ?', $menuId);
+        $select->order('position DESC');
+        $row = $this->fetchRow($select);
+        if ($row) {
+            return $row->position;
+        } else {
+            return 0;
+        }
+    }
 }
