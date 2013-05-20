@@ -39,10 +39,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                                         'namespace' => 'Model_'
                                 )
                         )
-                        
-                ));
+                )
+                );
         // Return it so that it can be stored by the bootstrap
         return $autoLoader;
+    }
+
+    protected function _initMenus ()
+    {
+        $view = $this->getResource('view');
+        $view->mainMenuId = 1;
+        $view->adminMenuId = 2;
     }
 }
 

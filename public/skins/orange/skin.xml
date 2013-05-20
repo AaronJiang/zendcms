@@ -3,6 +3,7 @@
 	<stylesheets>
 		<stylesheet>layout.css</stylesheet>
 		<stylesheet>text.css</stylesheet>
+		<stylesheet>nav.css</stylesheet>
 		<stylesheet>form.css</stylesheet>
 		<stylesheet>bootstrap.min.css</stylesheet>
 	</stylesheets>

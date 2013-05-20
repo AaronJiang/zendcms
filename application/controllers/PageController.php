@@ -116,14 +116,18 @@ class PageController extends Zend_Controller_Action
 
     public function openAction ()
     {
-        $id = $this->_request->getParam('id');
+        $title = $this->_request->getParam('title');
         // first confirm the page exists
-        $pageModel = new Model_Page();
-        if (! $pageModel->find($id)->current()) {
-            throw new Zend_Controller_Action_Exception(
-                    'The page you requested was not found', 404);
+        $mdlPage = new Model_Page();
+        $select = $mdlPage->select();
+        $select->where('name = ?', $title);
+        $row = $mdlPage->fetchRow($select);
+        if ($row) {
+            $this->view->page = new CMS_Content_Item_Page($row->id);
         } else {
-            $this->view->page = new CMS_Content_Item_Page($id);
+            // the error handler will catch this exception
+            throw new Zend_Controller_Action_Exception(
+                    "The page you requested was not found", 404);
         }
     }
 }

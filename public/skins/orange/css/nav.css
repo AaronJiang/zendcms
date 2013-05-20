@@ -1,0 +1,19 @@
+@CHARSET "ISO-8859-1";
+#nav ul{
+    list-style:none;
+}
+#nav ul li{
+    padding:8px 20px;
+}
+#nav ul li a{
+    color:#FCE6C8;
+    font-size:26px;
+    text-decoration:none;
+}
+#nav ul li a:hover{
+    color:#fff;
+}
+#nav ul li a.selected{
+    font-weight:bold;
+}
+

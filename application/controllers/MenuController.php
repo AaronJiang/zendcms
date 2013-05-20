@@ -64,7 +64,35 @@ class MenuController extends Zend_Controller_Action
         $mdlMenu->deleteMenu($id);
         $this->_forward('index');
     }
+
+    public function renderAction ()
+    {
+        $menu = $this->_request->getParam('menu');
+        $mdlMenuItems = new Model_MenuItem();
+        $menuItems = $mdlMenuItems->getItemsByMenu($menu);
+        
+        if (count($menuItems) > 0) {
+            foreach ($menuItems as $item) {
+                $label = $item->label;
+                if (! empty($item->link)) {
+                    $uri = $item->link;
+                } else {
+                    // update this to form more search-engine-friendly URLs
+                    $page = new CMS_Content_Item_Page($item->page_id);
+                    $uri = '/page/open/title/' . $page->name;
+                }
+                $itemArray[] = array(
+                        'label' => $label,
+                        'uri' => $uri
+                );
+            }
+            $container = new Zend_Navigation($itemArray);
+            $this->view->navigation()->setContainer($container);
+        }
+    }
 }
+
+
 
 
 

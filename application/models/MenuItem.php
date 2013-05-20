@@ -56,4 +56,88 @@ class Model_MenuItem extends Zend_Db_Table_Abstract
             return 0;
         }
     }
+
+    public function moveUp ($itemId)
+    {
+        $row = $this->find($itemId)->current();
+        if ($row) {
+            $position = $row->position;
+            if ($position < 1) {
+                // this is already the first item
+                return FALSE;
+            } else {
+                $select = $this->select();
+                $select->order('position DESC');
+                $select->where('position < ?', $position);
+                $select->where('menu_id = ?', $row->menu_id);
+                $previousItem = $this->fetchRow($select);
+                if ($previousItem) {
+                    // swith position with previous item
+                    $previousPosition = $previousItem->position;
+                    $previousItem->position = $position;
+                    $previousItem->save();
+                    $row->position = $previousPosition;
+                    $row->save();
+                }
+            }
+        } else {
+            throw new Zend_Exception('Error loading menu item');
+        }
+    }
+
+    public function moveDown ($itemId)
+    {
+        $row = $this->find($itemId)->current();
+        if ($row) {
+            $position = $row->position;
+            if ($position == $this->_getLastPosition($row->menu_id)) {
+                // this is alreay the last item
+                return FALSE;
+            } else {
+                // find the next item
+                $select = $this->select();
+                $select->order('position ASC');
+                $select->where('position > ?', $position);
+                $select->where('menu_id = ?', $row->menu_id);
+                $nextItem = $this->fetchRow($select);
+                if ($nextItem) {
+                    // switch positions with the next item
+                    $nextPosition = $nextItem->position;
+                    $nextItem->position = $position;
+                    $nextItem->save();
+                    $row->position = $nextPosition;
+                    $row->save();
+                }
+            }
+        } else {
+            throw new Zend_Exception('Error loading menu item');
+        }
+    }
+
+    public function updateItem ($itemId, $label, $pageId = 0, $link = null)
+    {
+        $row = $this->find($itemId)->current();
+        if ($row) {
+            $row->label = $label;
+            $row->page_id = $pageId;
+            if ($pageId < 1) {
+                $row->link = $link;
+            } else {
+                $row->link = null;
+            }
+            return $row->save();
+        } else {
+            throw new Zend_Exception('error loading menu item');
+        }
+    }
+
+    public function deleteItem ($itemId)
+    {
+        $row = $this->find($itemId)->current();
+        if ($row) {
+            return $row->delete();
+        } else {
+            throw new Zend_Exception("Error loading menu item");
+        }
+    }
 }
