@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 17, 2013 at 04:46 PM
+-- Generation Time: May 20, 2013 at 05:07 PM
 -- Server version: 5.1.62
 -- PHP Version: 5.3.10-1ubuntu2ppa6~lucid
 
@@ -99,8 +99,8 @@ CREATE TABLE IF NOT EXISTS `menus` (
 --
 
 INSERT INTO `menus` (`id`, `name`, `access_level`) VALUES
-(3, 'admin_menu', NULL),
-(4, 'main_menu', NULL);
+(2, 'admin_menu', NULL),
+(1, 'main_menu', NULL);
 
 -- --------------------------------------------------------
 
@@ -116,12 +116,16 @@ CREATE TABLE IF NOT EXISTS `menu_items` (
   `link` varchar(250) DEFAULT NULL,
   `position` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `menu_items`
 --
 
+INSERT INTO `menu_items` (`id`, `menu_id`, `label`, `page_id`, `link`, `position`) VALUES
+(1, 2, 'Manage Content', 0, '/page', 1),
+(2, 2, 'Manage Menus', 0, '/menu', 2),
+(3, 1, 'Home', 0, '/', 1);
 
 -- --------------------------------------------------------
 
@@ -147,3 +151,27 @@ INSERT INTO `pages` (`id`, `parent_id`, `namespace`, `name`, `date_created`) VAL
 (6, 0, 'page', 'Create A Repo', 1368600926),
 (5, 0, 'page', 'Set Up Git', 1368600803),
 (8, 0, 'page', 'Be Social', 1368601486);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) DEFAULT NULL,
+  `password` varchar(250) DEFAULT NULL,
+  `first_name` varchar(50) DEFAULT NULL,
+  `last_name` varchar(50) DEFAULT NULL,
+  `role` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `role`) VALUES
+(1, 'aaron', '698d51a19d8a121ce581499d7b701668', 'Aaron', 'Jiang', 'User'),
+(2, 'Steve', '202cb962ac59075b964b07152d234b70', 'Steve', 'Jobs', 'User');

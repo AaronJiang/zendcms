@@ -39,6 +39,11 @@
           <actionMethod actionName="add"/>
           <actionMethod actionName="update"/>
         </controllerFile>
+        <controllerFile controllerName="User">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="create"/>
+          <actionMethod actionName="list"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
       <layoutsDirectory enabled="false"/>
@@ -109,6 +114,15 @@
           <viewControllerScriptsDirectory forControllerName="Menu">
             <viewScriptFile forActionName="render"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="create"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="list"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewFiltersDirectory enabled="false"/>
@@ -147,6 +161,7 @@
           <testApplicationControllerFile filesystemName="PageControllerTest.php"/>
           <testApplicationControllerFile filesystemName="MenuControllerTest.php"/>
           <testApplicationControllerFile filesystemName="MenuitemControllerTest.php"/>
+          <testApplicationControllerFile filesystemName="UserControllerTest.php"/>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>
       <testLibraryDirectory>
