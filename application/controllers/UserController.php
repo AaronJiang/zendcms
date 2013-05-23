@@ -129,6 +129,7 @@ class UserController extends Zend_Controller_Action
                                         'role'
                                 )));
                 return $this->_forward('index');
+            } else {
                 $this->view->loginMessage = "Sorry, your username or
                                  password was incorrect";
             }

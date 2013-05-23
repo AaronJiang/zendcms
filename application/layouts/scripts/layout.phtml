@@ -29,6 +29,15 @@ $this->layout()->userForm = $this->action('index', 'user');
             <?php echo $this->layout()->nav; ?>&nbsp;
         </div>
         <div id="sidebar">
+            <div id='searchForm'>
+                <h2>Search Site</h2>
+                <?php
+                $searchForm = new Form_Search();
+                $searchForm->setAction('/search');
+                echo $searchForm;
+                ?>
+                <br />
+            </div>
             <div id="subNav">
                 <?php echo $this->layout()->subNav; ?>&nbsp;
             </div>

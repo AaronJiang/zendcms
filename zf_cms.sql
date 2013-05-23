@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 20, 2013 at 05:07 PM
+-- Generation Time: May 23, 2013 at 04:47 PM
 -- Server version: 5.1.62
 -- PHP Version: 5.3.10-1ubuntu2ppa6~lucid
 
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `menu_items` (
   `link` varchar(250) DEFAULT NULL,
   `position` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `menu_items`
@@ -125,7 +125,8 @@ CREATE TABLE IF NOT EXISTS `menu_items` (
 INSERT INTO `menu_items` (`id`, `menu_id`, `label`, `page_id`, `link`, `position`) VALUES
 (1, 2, 'Manage Content', 0, '/page', 1),
 (2, 2, 'Manage Menus', 0, '/menu', 2),
-(3, 1, 'Home', 0, '/', 1);
+(3, 1, 'Home', 0, '/', 1),
+(4, 2, 'Rebuild Search Index', 0, '/search/build', 3);
 
 -- --------------------------------------------------------
 
@@ -173,5 +174,5 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `role`) VALUES
-(1, 'aaron', '698d51a19d8a121ce581499d7b701668', 'Aaron', 'Jiang', 'User'),
-(2, 'Steve', '202cb962ac59075b964b07152d234b70', 'Steve', 'Jobs', 'User');
+(1, 'Aaron', '202cb962ac59075b964b07152d234b70', 'Long', 'Jiang', 'User'),
+(2, 'Steve', '202cb962ac59075b964b07152d234b70', 'Steve', 'Jobs', 'Administrator');
