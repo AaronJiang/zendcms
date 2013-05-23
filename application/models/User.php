@@ -29,10 +29,52 @@ class Model_User extends Zend_Db_Table_Abstract
     {
         $userModel = new self();
         $select = $userModel->select();
-        $select->order(array(
-                'last_name',
-                'first_name'
-        ));
+        $select->order(
+                array(
+                        'last_name',
+                        'first_name'
+                ));
         return $userModel->fetchAll($select);
+    }
+
+    public function updateUser ($id, $username, $firstName, $lastName, $role)
+    {
+        // fetch the user's row
+        $rowUser = $this->find($id)->current();
+        
+        if ($rowUser) {
+            $rowUser->username = $username;
+            $rowUser->first_name = $firstName;
+            $rowUser->last_name = $lastName;
+            $rowUser->role = $role;
+            $rowUser->save();
+            // return the updated user
+            return $rowUser;
+        } else {
+            throw new Zend_Exception('User not found');
+        }
+    }
+
+    public function updatePassword ($id, $password)
+    {
+        $rowUser = $this->find($id)->current();
+        
+        if ($rowUser) {
+            $rowUser->password = md5($password);
+            $rowUser->save();
+        } else {
+            throw new Zend_Exception('Password update failed, no user found');
+        }
+    }
+
+    public function deleteUser ($id)
+    {
+        // fetch the user's row
+        $rowUser = $this->find($id)->current();
+        if ($rowUser) {
+            $rowUser->delete();
+        } else {
+            throw new Zend_Exception("Could not delete user.");
+        }
     }
 }

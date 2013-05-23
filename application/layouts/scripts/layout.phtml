@@ -1,22 +1,22 @@
 <?php 
+echo '<?xml version="1.0" encoding="UTF-8" ?>';
+echo $this->doctype();
 $this->layout()->nav = $this->action('render', 'menu', null,
 		array('menu' => $this->mainMenuId));
 $this->layout()->adminMenu = $this->action(
 		'render', 'menu', null, array('menu' => $this->adminMenuId)
 );
-
-echo '<?xml version="1.0" encoding="UTF-8" ?>';
-echo $this->doctype();
+$this->layout()->userForm = $this->action('index', 'user');
 ?>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <?php 
-    echo $this->headTitle();
-    echo $this->headScript();
     // add a link to the site style sheet
     // $this->headLink()->appendStylesheet('/css/layout.css');
     $this->loadSkin($this->skin);
+    echo $this->headTitle();
+    echo $this->headScript();
     echo $this->headLink();
     ?>
 </head>
