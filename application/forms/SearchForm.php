@@ -10,7 +10,7 @@ class Form_SearchForm extends Zend_Form
         $this->addElement($query);
         
         $submit = $this->createElement('submit', 'search');
-        $submit->setLabel('Search Site');
+        $submit->setLabel('search');
         $submit->setDecorators(array('ViewHelper'));
         $this->addElement($submit);
     }
