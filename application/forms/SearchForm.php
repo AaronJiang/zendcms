@@ -11,6 +11,7 @@ class Form_SearchForm extends Zend_Form
         
         $submit = $this->createElement('submit', 'search');
         $submit->setLabel('search');
+        $submit->setAttrib('class', 'btn');
         $submit->setDecorators(array('ViewHelper'));
         $this->addElement($submit);
     }

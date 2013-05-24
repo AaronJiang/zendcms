@@ -10,7 +10,16 @@ class SearchController extends Zend_Controller_Action
 
     public function indexAction ()
     {
-        // action body
+        if ($this->_request->isPost()) {
+            $keywords = $this->_request->getParam('query');
+            $query = Zend_Search_Lucene_Search_QueryParser::parse($keywords);
+            $index = Zend_Search_Lucene::open(APPLICATION_PATH . '/indexes');
+            $hits = $index->find($query);
+            $this->view->results = $hits;
+            $this->view->keywords = $keywords;
+        } else {
+            $this->view->results = null;
+        }
     }
 
     public function buildAction ()
