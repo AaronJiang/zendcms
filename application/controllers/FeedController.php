@@ -3,17 +3,17 @@
 class FeedController extends Zend_Controller_Action
 {
 
-    public function init()
+    public function init ()
     {
         /* Initialize action controller here */
     }
 
-    public function indexAction()
+    public function indexAction ()
     {
         // action body
     }
 
-    public function rssAction()
+    public function rssAction ()
     {
         // build the feed array
         $feedArray = array();
@@ -23,11 +23,39 @@ class FeedController extends Zend_Controller_Action
         $feedArray['link'] = 'http://jianglong.org';
         
         // the published timestamp is optional
-        $feedArray['published'] = Zend_Date::now()->toString(Zend_date::TIMESTAMP);
+        $feedArray['published'] = Zend_Date::now()->toString(
+                Zend_date::TIMESTAMP);
         $feedArray['charset'] = 'UTF8';
+        
+        // first get the most recent pages
+        $mdlPage = new Model_Page();
+        $recentPages = $mdlPage->getRecentPages();
+        
+        // add the entries
+        if (is_array($recentPages) && count($recentPages) > 0) {
+            foreach ($recentPages as $page) {
+                // create the entry
+                $entry = array();
+                $entry['guid'] = $page->id;
+                $entry['title'] = $page->headline;
+                $entry['link'] = 'http://zf.localhost/page/open/title/' .
+                         $page->name;
+                $entry['description'] = $page->description;
+                $entry['content'] = $page->content;
+                
+                // add it to the feed
+                $feedArray['entries'][] = $entry;
+            }
+        }
+        
+        // create an RSS feed from the array
+        $feed = Zend_Feed::importArray($feedArray, 'rss');
+        
+        // now send the feed
+        $this->_helper->viewRenderer->setNoRender();
+        $this->_helper->layout->disableLayout();
+        $feed->send();
     }
-
-
 }
 
 

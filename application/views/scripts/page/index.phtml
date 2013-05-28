@@ -22,7 +22,7 @@ if ($this->recentPages) {
 	<h3>More Pages</h3>
 	<ul>
     <?php foreach ($this->recentPages as $page) {?>
-    <li><a href='/page/open/id/<?php echo $page->id; ?>'>
+    <li><a href='/page/open/title/<?php echo $page->name; ?>'>
          <?php echo $page->headline?></a></li>
     <?php } ?>
     </ul>
