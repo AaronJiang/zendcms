@@ -24,6 +24,10 @@ $this->layout()->userForm = $this->action('index', 'user');
     ?>
 </head>
 <body>
+<?php
+// $this->addScriptPath(APPLICATION_PATH . '/views/scripts');
+// echo $this->render('util/profiler.phtml');
+?>
 	<div id="pageWrapper">
 		<div id="header">
 			<h1>Zend Framework CMS</h1>
@@ -41,14 +45,14 @@ $this->layout()->userForm = $this->action('index', 'user');
                 ?>
                 <br />
 			</div>
-			
+
 			<div id="userForm">
                 <?php echo $this->layout()->userForm; ?>&nbsp;
             </div>
-            <div id="adminMenu">
+			<div id="adminMenu">
                 <?php echo $this->layout()->adminMenu; ?>&nbsp;
             </div>
-<!-- 			<div id="subNav"> -->
+			<!-- 			<div id="subNav"> -->
                 <?php //echo $this->layout()->subNav; ?>&nbsp;
 <!--             </div> -->
 			<div id="feeds">

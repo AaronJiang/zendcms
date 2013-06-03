@@ -15,11 +15,11 @@ abstract class CMS_Content_Item_Abstract
 
     protected $_pageModel;
 
-    public function __construct ($pageId = null)
+    public function __construct ($page = null)
     {
         $this->_pageModel = new Model_Page();
-        if (null != $pageId) {
-            $this->loadPageObject(intval($pageId));
+        if (null != $page) {
+            $this->loadPageObject($page);
         }
     }
 
@@ -56,10 +56,16 @@ abstract class CMS_Content_Item_Abstract
         }
     }
 
-    public function loadPageObject ($id)
+    public function loadPageObject ($page)
     {
-        $this->id = $id;
-        $row = $this->_getInnerRow();
+        if (is_object($page) && get_class($page) == 'Zend_Db_Table_Row') {
+            $row = $page;
+            $this->id = $row->id;
+        } else {
+            $this->id = intval($page);
+            $row = $this->_getInnerRow();
+        }
+        
         if ($row) {
             if ($row->namespace != $this->_namespace) {
                 throw new Zend_Exception(

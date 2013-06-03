@@ -123,7 +123,7 @@ class PageController extends Zend_Controller_Action
         $select->where('name = ?', $title);
         $row = $mdlPage->fetchRow($select);
         if ($row) {
-            $this->view->page = new CMS_Content_Item_Page($row->id);
+            $this->view->page = new CMS_Content_Item_Page($row);
         } else {
             // the error handler will catch this exception
             throw new Zend_Controller_Action_Exception(
